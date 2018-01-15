@@ -1,0 +1,8 @@
+#Intellij
+.idea
+
+#Firebase-Admin
+admin.json
+
+#Node
+node_modules/
