@@ -200,7 +200,7 @@ module.exports = class Notification {
                 }
             });
 
-            arr.unshift(noti);
+            arr.push(noti);
         };
 
         $('body').contents()
@@ -219,7 +219,7 @@ module.exports = class Notification {
                     mContent = '';
                 }
             });
-        arr.pop();
+        arr.shift();
         this.dataRef.set(arr);
     }
 };
