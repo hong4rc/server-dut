@@ -6,7 +6,7 @@ const log = require('npmlog');
 
 //inti admin
 const admin = require('firebase-admin');
-let serviceAccount = require(__dirname + '/admin.json');
+let serviceAccount = process.env.ADMIN ? JSON.parse(process.env.ADMIN) : require(__dirname + '/admin.json');
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: 'https://server-dut.firebaseio.com'
@@ -116,8 +116,8 @@ function getAllClass(title) {
             continue;
         }
         let className = regex[0];                   // Ex: '[15.Nh71]'
-        let name = part.split(className)[1];       //Ex: ' Kết cấu CT (BT Thép)'
-        className = className.replace('[', '').replace(']', '').replace('.Nh', '_');  //Ex: '15_71'
+        let name = part.split(className)[1];        //Ex: ' Kết cấu CT (BT Thép)'
+        className = className.replace('[', '').replace(']', '').replace('.Nh', '_');    //Ex: '15_71'
         if (name && className) {
             let classCode = getClassCode(className, name);
             classCode && allClass.push(classCode);
