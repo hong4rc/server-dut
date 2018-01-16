@@ -5,6 +5,7 @@
   "author": "Hongarc",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.2",
     "firebase-admin": "^5.8.0",
     "md5": "^2.2.1",
     "npmlog": "^4.1.2",
