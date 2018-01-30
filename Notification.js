@@ -96,12 +96,11 @@ function getClassCode(className, name) {
         if (listHP.hasOwnProperty(topic) && topic.indexOf(className) >= 0
             && listHP[topic].tenHP.replace(/\+/g, ' ').indexOf(name.trim()) >= 0) {
             log.info('topic', topic);
-            // Notification.prepareSend(noti, topic);
             return topic;
         }
     }
     log.error('failed', {className, name});
-    return '';
+    return {className: '', name};
 }
 
 /***
@@ -148,8 +147,7 @@ function sendNotification(noti) {
     };
     console.log(payload);
     for (let maHP of noti.maHP) {
-        noti.maHP.hasOwnProperty(maHP)
-        && admin.messaging().sendToTopic(maHP.className, payload)
+        maHP.className && admin.messaging().sendToTopic(maHP.className, payload)
             .then(res => {
                 log.info("Successfully sent message:", res);
             })
