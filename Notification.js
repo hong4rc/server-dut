@@ -100,7 +100,7 @@ function getClassCode(className, name) {
         }
     }
     log.error('failed', {className, name});
-    return {className: '', name};
+    return '';
 }
 
 /***
@@ -129,7 +129,7 @@ function sendNotification(noti) {
     let type = NOTI_TYPE.hp;
     if (noti.maHP.length === 0) {
         type = NOTI_TYPE.chung;
-        noti.maHP.push({className: TOPIC_CHUNG, name: 'Thông báo chung'})
+        noti.maHP.push(TOPIC_CHUNG)
     }
     let payload = {
         data: {
@@ -147,7 +147,9 @@ function sendNotification(noti) {
     };
     console.log(payload);
     for (let maHP of noti.maHP) {
-        maHP.className && admin.messaging().sendToTopic(maHP.className, payload)
+
+        console.log(maHP);
+        maHP && admin.messaging().sendToTopic(maHP, payload)
             .then(res => {
                 log.info("Successfully sent message:", res);
             })
