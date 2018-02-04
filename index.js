@@ -26,6 +26,6 @@ let loadFeed = () => {
 
     setTimeout(api.loadPage, 10000);
 
-    setInterval(api.loadPage, 30 * 60 * 1000);
+    setInterval(api.loadPage, 5 * 60 * 1000);
 };
 loadFeed();
