@@ -20,12 +20,13 @@ app.get('/', (req, res) => {
 });
 // app.use(express.static('public'));
 let port = process.env.PORT || 1997;
+let delayTime = process.env.DELAY_TIME || 5 * 60 * 1000;    //default is 5 min
 app.listen(port, () => console.log("This app is running in Port: ", port));
 
 let loadFeed = () => {
 
     setTimeout(api.loadPage, 10000);
 
-    setInterval(api.loadPage, 5 * 60 * 1000);
+    setInterval(api.loadPage, delayTime);
 };
 loadFeed();
