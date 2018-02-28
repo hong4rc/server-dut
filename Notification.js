@@ -138,9 +138,7 @@ function sendNotification(noti) {
             noi_dung: noti.content,
             id: noti.key,
             type: type,
-            screen: "main"
-        },
-        notification: {
+            screen: "main",
             title: noti.day + noti.event,
             body: noti.content.replace(/<.*?>/g, "").replace(/<.*?>/g, "").trim()
         }
