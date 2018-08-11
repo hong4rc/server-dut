@@ -1,28 +1,27 @@
 'use strict';
-let request = require('request').defaults({jar: true});
-let cheerio = require('cheerio');
-let log = require('npmlog');
-let fs = require('fs');
+const request = require('request').defaults({jar: true});
+const cheerio = require('cheerio');
+const log = require('npmlog');
 
 
 const URL_TB = 'http://daotao.dut.udn.vn/sv/G_Thongbao.aspx';
 const URL_HP = 'http://daotao.dut.udn.vn/sv/G_Thongbao_LopHP.aspx';
 
-let utils = require('./utils');
-let Notification = require('../Notification');
+const utils = require('./utils');
+const Notification = require('../Notification');
 
-let nChung = new Notification('chung');
-let nLopHP = new Notification('lop_hoc_phan');
+const nChung = new Notification('chung');
+const nLopHP = new Notification('lop_hoc_phan');
 
 const URL_HOME = 'http://daotao.dut.udn.vn/sv/';
 const QR_LOGIN = '#ctl01 input';
 
-let makeTrigger = (body, jar) => {
-    let $ = cheerio.load(body);
-    let form = {};
+const makeTrigger = (body, jar) => {
+    const $ = cheerio.load(body);
+    const form = {};
     $(QR_LOGIN).map((index, elem) => {
-        let name = $(elem).attr('name');
-        let val = $(elem).val();
+        const name = $(elem).attr('name');
+        const val = $(elem).val();
         if (val && name) {
             form[name] = val;
         }
@@ -36,8 +35,8 @@ let makeTrigger = (body, jar) => {
         .then(utils.saveCookies(jar));
 };
 
-let loadPage = () => new Promise(() => {
-    let jar = request.jar();
+const loadPage = () => new Promise(() => {
+    const jar = request.jar();
     return utils.get(URL_HOME)
         .then(utils.saveCookies(jar))
         .then(res => makeTrigger(res.body, jar))
@@ -52,6 +51,5 @@ let loadPage = () => new Promise(() => {
             });
         });
 });
-
 
 module.exports = {loadPage};
