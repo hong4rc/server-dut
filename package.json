@@ -13,6 +13,10 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "node index"
+    "start": "node index",
+    "lint": "eslint Notification.js index.js src/*"
+  },
+  "devDependencies": {
+    "eslint": "^5.3.0"
   }
 }
